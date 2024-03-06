@@ -118,6 +118,36 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 On the Unlock Jenkins page, paste this password into the Administrator password field and click Continue.
 
 
+### Important Plugins:
+Log in to your Jenkins instance and access the Jenkins server Dashboard navigate -> Manage Jenkins > Plugins -> select Available plugins -> search required plugins and install:
+
+- Role-based Authorization Strategy
+- Build Authorization Token Root
+- Pipeline: Deprecated Groovy Libraries
+- pipeline-groovy-lib
+- Build Pipeline
+- Blue ocean
+- ThinBackup
+- Git
+- Credentials Binding
+- SSH Agent
+- Publish Over SSH
+- Ansible
+- Maven Integration
+- Maven Invoker
+- Deploy to container
+- Copy Artifact
+- Docker
+- Docker Pipeline
+- docker-build-step
+- Docker Compose Build Step
+- CloudBees Docker Build and Publish
+- Ant
+- JUnit Realtime Test Reporter
+- openJDK-native-plugin
+- Eclipse Temurin installer
+
+
 ### Links:
 
 - [Jenkins install](https://www.jenkins.io/doc/book/installing/linux/#debianubuntu)
