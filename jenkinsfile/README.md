@@ -621,14 +621,73 @@ pipeline {
 
 
 
+### Multiline shell commands:
+
+Below is an example of using a multi-line sh step in a Jenkins pipeline. This allows you to run multiple shell commands in a single sh step using a multiline string.
+
+- The `sh` step is given a multi-line string using triple single-quotes (`'''`) to run multiple shell commands.
+- A multi-line sh block with triple double-quotes (`"""`) inside a script block, which is valid Groovy syntax.
+- `Note`: If you ever need to use Groovy variables inside the shell block, then you'd need to use double quotes (`"""`) and `${}` to interpolate. But for plain shell commands like in your example, `'''` is totally fine.
+
+
+#### Example-15:
+
+```
+pipeline {
+    agent any
+
+    stages {
+        
+        stage('Build') {
+            steps {
+                sh '''
+                    echo "Starting build process"
+                    echo "Build the app"
+                    echo "Deploying to production"
+                '''
+            }
+        }
+
+    }
+}
+
+```
+
+
+
+#### Example-16:
+
+```
+pipeline {
+    agent any
+
+    environment {
+        HELLO = "Hello World"
+    }
+
+    stages {
+        
+        stage('Build') {
+            steps {
+                sh """
+                    hostname
+                    whoami
+                    echo ${HELLO}
+                    uname -a
+                """
+            }
+        }
+
+    }
+}
+
+```
+
 
 
 ### Links:
 - [Pipeline Syntax](https://www.jenkins.io/doc/book/pipeline/syntax/)
 - [Variables use to shell and batch build steps](http://192.168.10.193:8080/env-vars.html/)
 - [Global Variable Reference](http://192.168.10.193:8080/job/demo-project/job/job1-jenkinsfile/pipeline-syntax/globals)
-- []()
-- []()
-- []()
-- []()
+
 
