@@ -684,6 +684,97 @@ pipeline {
 ```
 
 
+### `def` Keyword:
+
+In a Jenkinsfile, which is written in **Groovy-based DSL**, you can define variables using the `def` keyword. 
+
+- `def` defines a **local variable** in the Groovy `script { }` block. Variable definitions inside `script { }` blocks (Recommended for Declarative Pipelines)
+- If you want a **global variable** (accessible in multiple stages), define it **outside** the `pipeline { }` block or use `env` for environment variables:
+
+
+#### Local variable: 
+
+```
+pipeline {
+    agent any
+   
+   tools {
+        maven 'MAVEN_HOME' 
+    }
+   
+    stages {
+
+        stage('git checkout') {
+            steps {
+               git branch: 'main', url: 'https://github.com/technbd/docker-spring-boot-java.git'
+            }
+        }
+        
+        stage('maven version') {
+            steps {
+                script {
+                    def MAVEN_VER = 'mvn -v'
+                    sh "${MAVEN_VER}"
+                }
+            }
+        }
+        
+       stage('maven build') {
+            steps {
+                script {
+                    def BUILD = 'mvn clean package'
+                    sh "${BUILD}"
+                }
+            }
+        }
+    
+    }
+}
+
+```
+
+
+#### Global variable:
+
+```
+def MAVEN_VER = 'mvn -v'
+def BUILD = 'mvn clean package'
+
+pipeline {
+    agent any
+   
+   tools {
+        maven 'MAVEN_HOME' 
+    }
+   
+    stages {
+
+        stage('git checkout') {
+            steps {
+               git branch: 'main', url: 'https://github.com/technbd/docker-spring-boot-java.git'
+            }
+        }
+        
+        stage('maven version') {
+            steps {
+                sh "${MAVEN_VER}"
+            }
+        }
+        
+       stage('maven build') {
+            steps {
+               sh "${BUILD}"
+            }
+        }
+    
+    }
+}
+
+```
+
+
+
+
 
 ### Links:
 - [Pipeline Syntax](https://www.jenkins.io/doc/book/pipeline/syntax/)
